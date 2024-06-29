@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { Link, NavLink } from 'react-router-dom'
 import logo from '../assets/logo.png'
 import user from '../assets/user.svg'
+import logout from '../assets/logout.svg'
 import Navbar from './Navbar'
 import { useState } from 'react'
 import { MdClose,MdMenu } from 'react-icons/md'
@@ -61,10 +62,15 @@ const Header = () => {
                             <RiShoppingCart2Line className='p-2 h-10 w-10 hover:text-secondary'/>
                             <span className='relative flexCenter w-5 h-5 rounded-full bg-secondary text-primary medium-14 -top-2 right-3'>{getTotalCartItems()}</span>
                         </NavLink>
-                        <NavLink to={'/login'} className={'btn-secondary flexCenter gap-x-2 medium-16 rounded-xl'}>
-                            <img src={user} alt="" height={19} width={19} />
-                            Login
-                        </NavLink>
+                         
+                        {localStorage.getItem('auth-token') ?<NavLink onClick={()=>{localStorage.removeItem('auth-token'); window.location.replace('/')} } to={'logout'} className={'btn-secondary flexCenter gap-x-2 medium-16 rounded-xl'}>
+                            <img src={logout} alt="" height={19} width={19} />
+                            Logout
+                        </NavLink> :
+                        <NavLink  to={'login'} className={'btn-secondary flexCenter gap-x-2 medium-16 rounded-xl'}>
+                        <img src={user} alt="" height={19} width={19} />
+                        Login
+                    </NavLink>}
                     </div>
                 </div>
             </div>
